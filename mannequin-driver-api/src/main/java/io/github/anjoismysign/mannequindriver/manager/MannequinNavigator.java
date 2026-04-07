@@ -5,7 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mannequin;
-import org.bukkit.entity.Silverfish;
+import org.bukkit.entity.Zombie;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,7 +29,7 @@ public final class MannequinNavigator {
     private final UUID mannequinId;
     private final UUID driverId;
     private final Mannequin mannequin;
-    private final Silverfish driver;
+    private final Zombie driver;
     private final NavigationManager manager;
 
     private boolean isNavigating;
@@ -41,7 +41,7 @@ public final class MannequinNavigator {
     @ApiStatus.Internal
     MannequinNavigator(
             @NotNull Mannequin mannequin,
-            @NotNull Silverfish driver,
+            @NotNull Zombie driver,
             @NotNull NavigationManager manager
     ) {
         this.mannequinId = mannequin.getUniqueId();
@@ -189,7 +189,7 @@ public final class MannequinNavigator {
      * @return The Driver Mob entity, or null if the driver has been removed
      */
     @NotNull
-    public Silverfish getDriver() {
+    public Zombie getDriver() {
         return driver;
     }
 

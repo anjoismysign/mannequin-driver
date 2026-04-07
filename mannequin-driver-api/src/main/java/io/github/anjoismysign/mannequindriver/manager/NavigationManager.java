@@ -6,7 +6,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mannequin;
-import org.bukkit.entity.Silverfish;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -14,6 +14,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityRemoveEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
@@ -109,11 +111,18 @@ public final class NavigationManager implements Listener {
         }
 
         Location mannequinLocation = mannequin.getLocation();
-        Silverfish driver = (Silverfish) mannequinLocation.getWorld().spawnEntity(mannequinLocation, EntityType.SILVERFISH);
+        Zombie driver = (Zombie) mannequinLocation.getWorld().spawnEntity(mannequinLocation, EntityType.ZOMBIE);
         driver.setPersistent(false);
         driver.setCollidable(false);
         driver.setSilent(true);
         driver.setVisibleByDefault(false);
+        driver.addPotionEffect(new PotionEffect(
+                PotionEffectType.FIRE_RESISTANCE,
+                PotionEffect.INFINITE_DURATION,
+                0,
+                false,
+                false
+        ));
 
         Bukkit.getMobGoals().removeAllGoals(driver);
         MannequinNavigator navigator = new MannequinNavigator(mannequin, driver, this);
@@ -279,7 +288,7 @@ public final class NavigationManager implements Listener {
         if (navigator == null) {
             return;
         }
-        Silverfish driver = navigator.getDriver();
+        Zombie driver = navigator.getDriver();
         if (driver.isValid() && driver.getUniqueId().equals(entity.getUniqueId())) {
             event.setCancelled(true);
         }

@@ -6,7 +6,7 @@ import io.github.anjoismysign.personaljesus.ai.FollowPlayerGoal;
 import io.github.anjoismysign.personaljesus.ai.TeleportToPlayerGoal;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Mannequin;
-import org.bukkit.entity.Silverfish;
+import org.bukkit.entity.Zombie;
 
 import java.util.UUID;
 
@@ -16,7 +16,7 @@ public record MannequinData(Mannequin mannequin, MannequinNavigator navigator) {
                                    Mannequin mannequin,
                                    PersonalJesus plugin){
         MannequinNavigator navigator = plugin.getNavigationManager().register(mannequin);
-        Silverfish driver = navigator.getDriver();
+        Zombie driver = navigator.getDriver();
         Bukkit.getMobGoals().addGoal(driver, 0, new TeleportToPlayerGoal(navigator, playerId));
         Bukkit.getMobGoals().addGoal(driver, 1, new FollowPlayerGoal(navigator, playerId));
         return new MannequinData(mannequin,navigator);
