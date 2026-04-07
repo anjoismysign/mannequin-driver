@@ -1,0 +1,4 @@
+name: personal-jesus
+version: 1.0
+main: io.github.anjoismysign.personaljesus.PersonalJesus
+api-version: 1.21
