@@ -123,6 +123,13 @@ public final class NavigationManager implements Listener {
                 false,
                 false
         ));
+        driver.addPotionEffect(new PotionEffect(
+                PotionEffectType.INVISIBILITY,
+                PotionEffect.INFINITE_DURATION,
+                0,
+                false,
+                false
+        ));
 
         Bukkit.getMobGoals().removeAllGoals(driver);
         MannequinNavigator navigator = new MannequinNavigator(mannequin, driver, this);
