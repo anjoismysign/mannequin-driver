@@ -3,7 +3,6 @@ package io.github.anjoismysign.mannequindriver.manager;
 import com.destroystokyo.paper.entity.Pathfinder;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mannequin;
 import org.bukkit.entity.Zombie;
 import org.jetbrains.annotations.ApiStatus;
@@ -166,10 +165,10 @@ public final class MannequinNavigator {
     /**
      * Gets the Mannequin entity associated with this navigator.
      *
-     * @return The Mannequin LivingEntity
+     * @return The Mannequin
      */
     @NotNull
-    public LivingEntity getMannequin() {
+    public Mannequin getMannequin() {
         return mannequin;
     }
 
