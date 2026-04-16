@@ -2,6 +2,7 @@ package io.github.anjoismysign.mannequindriver.manager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -116,6 +117,7 @@ public final class NavigationManager implements Listener {
         driver.setCollidable(false);
         driver.setSilent(true);
         driver.setVisibleByDefault(false);
+        driver.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(0.25);
         driver.addPotionEffect(new PotionEffect(
                 PotionEffectType.FIRE_RESISTANCE,
                 PotionEffect.INFINITE_DURATION,

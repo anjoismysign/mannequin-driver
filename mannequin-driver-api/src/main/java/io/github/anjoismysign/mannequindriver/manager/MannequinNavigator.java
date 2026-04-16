@@ -135,6 +135,10 @@ public final class MannequinNavigator {
         isNavigating = false;
     }
 
+    public boolean isValid(){
+        return driver.isValid() && mannequin.isValid();
+    }
+
     public void remove(){
         if (driver.isValid()) {
             driver.remove();
