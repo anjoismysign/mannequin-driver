@@ -1,5 +1,6 @@
 package io.github.anjoismysign.mannequindriver.manager;
 
+import com.destroystokyo.paper.event.entity.EntityJumpEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
@@ -70,10 +71,6 @@ public final class NavigationManager implements Listener {
      * @throws IllegalArgumentException if plugin or driverType is null
      */
     public NavigationManager(@NotNull JavaPlugin plugin) {
-        if (plugin == null) {
-            throw new IllegalArgumentException("Plugin cannot be null");
-        }
-
         this.plugin = plugin;
         this.navigators = new HashMap<>();
         this.driverToMannequin = new HashMap<>();
@@ -88,6 +85,17 @@ public final class NavigationManager implements Listener {
         }.runTaskTimer(plugin, 0, 1);
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
+
+    @EventHandler
+    public void onJump(EntityJumpEvent event){
+        UUID driverId = event.getEntity().getUniqueId();
+        @Nullable MannequinNavigator navigator = getNavigatorByDriverId(driverId);
+        if (navigator == null){
+            return;
+        }
+        Mannequin mannequin = navigator.getMannequin();
+        mannequin.setJumping(true);
     }
 
     /**
@@ -241,6 +249,7 @@ public final class NavigationManager implements Listener {
         }
         navigators.clear();
         driverToMannequin.clear();
+        task.cancel();
     }
 
     /**
