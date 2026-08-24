@@ -56,6 +56,8 @@ import java.util.UUID;
  */
 public final class NavigationManager implements Listener {
 
+    private static final EntityType DRIVER_TYPE = EntityType.ZOMBIE;
+
     private final JavaPlugin plugin;
     private final Map<UUID, MannequinNavigator> navigators;
     private final Map<UUID, UUID> driverToMannequin;
@@ -120,7 +122,7 @@ public final class NavigationManager implements Listener {
         }
 
         Location mannequinLocation = mannequin.getLocation();
-        Zombie driver = (Zombie) mannequinLocation.getWorld().spawnEntity(mannequinLocation, EntityType.ZOMBIE);
+        Zombie driver = (Zombie) mannequinLocation.getWorld().spawnEntity(mannequinLocation, getDriverType());
         driver.setPersistent(false);
         driver.setCollidable(false);
         driver.setSilent(true);
@@ -327,5 +329,9 @@ public final class NavigationManager implements Listener {
     @NotNull
     public JavaPlugin getPlugin() {
         return plugin;
+    }
+
+    public static EntityType getDriverType(){
+        return DRIVER_TYPE;
     }
 }
